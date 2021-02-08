@@ -1,4 +1,4 @@
-#IInstallation: https://luma-led-matrix.readthedocs.io/en/latest/install.html
+# Installation: https://luma-led-matrix.readthedocs.io/en/latest/install.html
 import time
 import datetime
 
@@ -128,7 +128,6 @@ def big_hand(draw):
         draw.point((0, 0), fill="white")
 
 def brightness():
-    global b
     light = adc.read_adc(0, gain=1)
     if light >= 512:
         light = 512
@@ -139,12 +138,14 @@ def brightness():
         b = 0
     device.contrast(b)
 
-h = 0
-m = 0
 while True:
     brightness()
 
-    """ Full clock cycle test
+    """ Full clock cycle test (place a # in fron of line to enable)
+    if not 'h' in locals():
+        h = 0
+    if not 'm' in locals():
+        m = 0
     with canvas(virtual) as draw:
         number(draw, h, True)
         number(draw, m)
@@ -162,3 +163,5 @@ while True:
         big_hand(draw) # minute (each 5 minutes)
 
     time.sleep(0.25)
+    #"""
+    
