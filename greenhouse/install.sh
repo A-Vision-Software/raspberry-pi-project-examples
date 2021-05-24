@@ -1,5 +1,6 @@
 #!/bin/bash
 pip3 install smbus2
+pip3 install rpi.gpio
 pip3 install gpiozero
 pip3 install webthing 
 pip3 install sht20

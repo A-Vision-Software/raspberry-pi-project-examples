@@ -1,6 +1,6 @@
 # A-Vision Greenhouse monitor
 
-The A-Vision Greenhouse monitor makes use of https://webthings.io and does *not* include a WebThings gateway.
+The A-Vision Greenhouse monitor makes use of https://webthings.io and does **not** include a WebThings gateway.
 
 Please refer to https://webthings.io/docs/gateway-getting-started-guide.html to install a WebThings gateway.
 You can either chose to install the Greenhouse monitor on a separate Raspberry Pi (3/4/ZeroW) or combine it with a WebThings gateway.
@@ -17,7 +17,7 @@ Requirements:
 
 
     wget https://github.com/A-Vision-Software/raspberry-pi-project-examples/archive/refs/heads/main.zip
-    unzip main.zip "raspberry-pi-project-examples-main/greenhouse/*" -d greenhouse
+    unzip -j main.zip "raspberry-pi-project-examples-main/greenhouse/*" -d greenhouse
     rm main.zip
     cd greenhouse
     chmod 0775 install.sh
@@ -26,10 +26,13 @@ Requirements:
 ## Run the greenhouse script as a service
 
 Running the greenhouse WebThings script as a service is required to autmoatically start the WebThings greenhouse server after rebooting the Raspberry Pi.
+**This is not a part of the install script.**
 
 Add a new service to the system using the following command-
 
     sudo nano /lib/systemd/system/greenhouse.service
+
+Or copy the `greenhouse.service` file to `/lib/systemd/system/`.
 
 Add the following content to the service file-
 
@@ -60,4 +63,9 @@ And enable the new service
 Finally start the new greenhouse service and view their status
 
     sudo systemctl start greenhouse.service
+    (alternative => sudo service greenhouse start)
+
+Check if the service is running and view warnings/errors
+
     sudo systemctl status greenhouse.service
+    (alternative => sudo service greenhouse status)
