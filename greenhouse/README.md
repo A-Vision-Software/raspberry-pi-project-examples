@@ -20,7 +20,7 @@ Requirements:
     unzip -j main.zip "raspberry-pi-project-examples-main/greenhouse/*" -d greenhouse
     rm main.zip
     cd greenhouse
-    chmod 0775 install.sh
+    chmod 0755 install.sh
     ./install.sh
 
 ## Run the greenhouse script as a service
