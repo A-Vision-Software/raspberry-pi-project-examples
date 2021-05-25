@@ -1,3 +1,4 @@
+![A-Vision Solutions][logo]
 # A-Vision Greenhouse monitor
 
 The A-Vision Greenhouse monitor makes use of https://webthings.io and does **not** include a WebThings gateway.
@@ -11,6 +12,7 @@ Requirements:
 - gpiozero (https://gpiozero.readthedocs.io/en/stable/)
 - WebThings framework (https://webthings.io/api/)
 
+![A-Vision Greenhouse monitor][product]
 
 ## Installation
 
@@ -23,7 +25,7 @@ Requirements:
     chmod 0755 install.sh
     ./install.sh
 
-## Run the greenhouse script as a service
+## Run the greenhouse Python script as a service
 
 Running the greenhouse WebThings script as a service is required to autmoatically start the WebThings greenhouse server after rebooting the Raspberry Pi.
 **This is not a part of the install script.**
@@ -69,3 +71,7 @@ Check if the service is running and view warnings/errors
 
     sudo systemctl status greenhouse.service
     (alternative => sudo service greenhouse status)
+
+
+[logo]: https://raspberry.a-vision.solutions/wp-content/uploads/2021/03/logo-company-name-description-automatically-gene.png "A-Vision solutions"
+[product]: https://raspberry.a-vision.solutions/wp-content/uploads/2021/05/greenhousemonitor.png "A-Vision Greenhouse monitor"
