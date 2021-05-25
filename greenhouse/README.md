@@ -18,7 +18,7 @@ Requirements:
 ## Installation
 
 Once you have your Raspberry Pi up and running, follow the following instructions to get the Greenhouse monitor script
-```
+```bash
 wget https://github.com/A-Vision-Software/raspberry-pi-project-examples/archive/refs/heads/main.zip
 unzip -j main.zip "raspberry-pi-project-examples-main/greenhouse/*" -d greenhouse
 rm main.zip
@@ -41,7 +41,7 @@ sudo nano /lib/systemd/system/greenhouse.service
 Or copy the `greenhouse.service` file to `/lib/systemd/system/`.
 
 Add the following content to the service file-
-``` ini
+```ini
 [Unit]
 Description=Greenhouse monitor service
 After=multi-user.target
