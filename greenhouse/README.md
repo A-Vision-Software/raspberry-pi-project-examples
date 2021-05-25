@@ -18,7 +18,7 @@ Requirements:
 ## Installation
 
 Once you have your Raspberry Pi up and running, follow the following instructions to get the Greenhouse monitor script
-```bash
+```shell
 wget https://github.com/A-Vision-Software/raspberry-pi-project-examples/archive/refs/heads/main.zip
 unzip -j main.zip "raspberry-pi-project-examples-main/greenhouse/*" -d greenhouse
 rm main.zip
