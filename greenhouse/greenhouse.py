@@ -101,7 +101,7 @@ def run_server():
     try:
         logging.info('starting the server')
         server.start()
-    except KeyboardInterrupt:
+    except:
         logging.debug('canceling the sensors update looping task')
         sensors.cancel_update_level_task()
         humidity_temperature.cancel_update_level_task()

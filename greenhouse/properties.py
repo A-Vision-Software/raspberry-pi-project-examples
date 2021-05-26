@@ -180,8 +180,14 @@ class SHT20_property(Property):
         propertyType = 'LevelProperty'
         if self.parameter == 'temperature':
             propertyType = 'TemperatureProperty'
+            propertyUnit = '°C'
+            propertyMinimum = -40
+            propertyMaximum = 125
         if self.parameter == 'humidity':
             propertyType = 'HumidityProperty'
+            propertyUnit = 'percent'
+            propertyMinimum = 0
+            propertyMaximum = 100
         Property.__init__(
             self,
             thing=theThing,
@@ -191,9 +197,9 @@ class SHT20_property(Property):
                 '@type': propertyType,
                 'title': propertyName,
                 'type': 'number',
-                'minimum': -40,
-                'maximum': 125,
-                'unit': '°C',
+                'minimum': propertyMinimum,
+                'maximum': propertyMaximum,
+                'unit': propertyUnit,
                 'readOnly': True,
                 'description': parameter +' ' + propertyName
             }
