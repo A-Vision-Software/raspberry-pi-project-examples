@@ -24,6 +24,7 @@ unzip -j main.zip "raspberry-pi-project-examples-main/greenhouse/*" -d greenhous
 rm main.zip
 cd greenhouse
 chmod 0755 install.sh
+chmod 0755 update.sh
 ./install.sh
 ```
 Make sure to have installed Python3 + pip (`sudo apt install python3 python3-pip`) before installing the Greenhouse monitor script.
