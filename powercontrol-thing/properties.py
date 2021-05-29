@@ -22,7 +22,7 @@ class PWM_property(Property):
     """PWM output"""
 
     def __init__(self, theThing, propertyName='', outputPin=0):
-        self.output = PWMOutputDevice(outputPin, active_high=True, frequency=1000)
+        self.output = PWMOutputDevice(outputPin, active_high=True, frequency=2000)
         self.outputValue = Value(0.0, lambda v: self.setOutput(v))
         Property.__init__(
             self,
