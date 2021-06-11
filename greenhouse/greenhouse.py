@@ -17,6 +17,7 @@ import logging
 import properties
 import names
 import constants
+import uuid
 
 class HumidityTempSensor(Thing):
     """A humidity / temperature sensor which updates its measurement every few seconds."""
@@ -55,10 +56,11 @@ class DigitalOutputs(Thing):
             names.DIGITAL
         )
 
-        self.add_property(properties.DigitalOutput_property(self, names.DIGITAL1, 18))
-        self.add_property(properties.DigitalOutput_property(self, names.DIGITAL2, 19))
-        self.add_property(properties.DigitalOutput_property(self, names.DIGITAL3, 20))
-        self.add_property(properties.DigitalOutput_property(self, names.DIGITAL4, 21))
+        self.add_property(properties.DigitalOutput_property(self, names.O18, 18))
+        self.add_property(properties.DigitalOutput_property(self, names.O19, 19))
+        self.add_property(properties.DigitalOutput_property(self, names.O20, 21))
+        self.add_property(properties.DigitalOutput_property(self, names.O21, 20))
+
 
 class AnalogSensors(Thing):
     """Free definable analog sensors, levels in percent."""
@@ -71,11 +73,11 @@ class AnalogSensors(Thing):
             ['MultiLevelSensor'],
             names.ANALOG
         )
-
-        self.add_property(properties.ADS1015_property(self, names.ANALOG1, 22, 0))
-        self.add_property(properties.ADS1015_property(self, names.ANALOG2, 23, 1))
-        self.add_property(properties.ADS1015_property(self, names.ANALOG3, 24, 2))
-        self.add_property(properties.ADS1015_property(self, names.ANALOG4, 25, 3))
+        self.set_ui_href('https://raspberry.a-vision.solutions/greenhouse/settings.html')
+        self.add_property(properties.ADS1015_property(self, names.AI0, 22, 0))
+        self.add_property(properties.ADS1015_property(self, names.AI1, 23, 1))
+        self.add_property(properties.ADS1015_property(self, names.AI3, 24, 2))
+        self.add_property(properties.ADS1015_property(self, names.AI2, 25, 3))
 
     def update_levels(self):
         for prop in self.properties:

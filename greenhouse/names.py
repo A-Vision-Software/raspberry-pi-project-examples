@@ -10,16 +10,16 @@
 ################################################################################
 
 ANALOG = "Greenhouse analog sensors"
-ANALOG1 = "Moisture high"
-ANALOG2 = "Moisture low"
-ANALOG3 = "Daylight"
-ANALOG4 = "A4"
+AI0 = "Soil Moisture upper"
+AI1 = "Rain meter"
+AI2 = "Power level"
+AI3 = "Daylight"
 
 DIGITAL = "Greenhouse digital activators"
-DIGITAL1 = "Waterpump high"
-DIGITAL2 = "Waterpump low"
-DIGITAL3 = "D3"
-DIGITAL4 = "D4"
+O18 = "Waterpump high"
+O19 = "Waterpump low"
+O20 = "O20"
+O21 = "O21"
 
 MCP3425 = "Power control current"
 TMP75 = "Power control temperature"

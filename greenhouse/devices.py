@@ -16,6 +16,7 @@ import time
 
 ADS1015ADDRESS = 0x48 # Alternatice address is 0x49
 SHT20ADDRESS = 0x40 # Fixed!
+SHT21ADDRESS = 0x40 # Fixed!
 TMP75ADDRESS = 0x4F # Fixed!
 MCP3425ADDRESS = 0x68 # Fixed!
 
@@ -106,16 +107,56 @@ class _SHT20():
 
     def __init__(self):
         self.address = SHT20ADDRESS
-        if self.available():
-            self.sht20 =  SHT20(1, resolution=SHT20.TEMP_RES_14bit)
+        self.sht20 = False
 
     def available(self):
-        return I2Cexists(self.address)
+        try:
+            if (self.sht20):
+                return True
+            self.sht20 =  SHT20(1, resolution=SHT20.TEMP_RES_14bit)
+            return True
+        except:
+            return False
 
     def temperature(self):
         try:
             if self.available():
                 return self.sht20.read_temp()
+            else:
+                return -1
+        except:
+            return False
+
+    def humidity(self):
+        try:
+            if self.available():
+                return self.sht20.read_humid()
+            else:
+                return -1
+        except:
+            return False
+################################################################################
+
+################################################################################
+class _SHT21():
+
+    def __init__(self):
+        self.address = SHT21ADDRESS
+        self.sht21 = False
+
+    def available(self):
+        try:
+            if (self.sht21):
+                return True
+            self.sht21 =  SHT20(1, resolution=SHT20.TEMP_RES_14bit)
+            return True
+        except:
+            return False
+
+    def temperature(self):
+        try:
+            if self.available():
+                return self.sht21.read_temp()
             else:
                 return -1
         except: # exception if read_byte fails
@@ -124,7 +165,7 @@ class _SHT20():
     def humidity(self):
         try:
             if self.available():
-                return self.sht20.read_humid()
+                return self.sht21.read_humid()
             else:
                 return -1
         except: # exception if read_byte fails

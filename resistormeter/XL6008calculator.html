@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XL6008 calculator</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+    <style>
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 14px;
+        }
+        label {
+            position: absolute;
+            height: 24px;
+        }
+        label > select ,
+        label > input {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 14px;
+            width: calc(100% - 1em);
+            line-height: 21px;
+            height: 21px;
+            text-align: right;
+            background-color: yellow;
+            border: 1px solid rgba(0, 0, 0, 0.5);
+        }
+        label.r1 {
+            top: 273px;
+            left: 261px;
+            width: 55px;
+        }
+        label.r2 {
+            top: 151px;
+            right: 18px;
+            width: 55px;
+        }
+        label.vout {
+            top: 282px;
+            right: 22px;
+            width: 38px;
+        }
+        label.vout > input {
+            width: 100%;
+            background-color: yellowgreen;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="xl6008-calculator" style="width: 800px; margin: 0 auto; position: relative;">
+        <div style="width: 800px; height: 510px; background: transparent url(xl6008.jpg) center center no-repeat; background-size: contain;">
+            <label class="r1">
+                <select v-model="R1">
+                    <option v-for="(resistor, index) in resistors" :key="index" :value="resistor" v-text="resistor"></option>
+                </select>k
+            </label>
+            <label class="r2">
+                <select v-model="R2">
+                    <option v-for="(resistor, index) in resistors" :key="index" :value="resistor" v-text="resistor"></option>
+                </select>k
+            </label>
+            <label class="vout">
+                <input v-model="Vout">
+            </label>
+        </div>
+    </div>
+    <script>
+        var E12 = [10, 12, 15, 18, 22, 27, 33, 39, 47, 56, 68, 82];
+        var E24 = [10, 11, 12, 13, 15, 16, 18, 20, 22, 24, 27, 30, 33, 36, 39, 43, 47, 51, 56, 62, 68, 75, 82, 91];
+
+        var calculator = new Vue({
+            el: '#xl6008-calculator',
+            created: function () {
+                let self = this;
+            },
+            mounted: function () {
+                let self = this;
+                self.init();
+            },
+            data: {
+                E12: [10, 12, 15, 18, 22, 27, 33, 39, 47, 56, 68, 82],
+                E24: [10, 11, 12, 13, 15, 16, 18, 20, 22, 24, 27, 30, 33, 36, 39, 43, 47, 51, 56, 62, 68, 75, 82, 91],
+                R1: 10,
+                R2: 33,
+                Vout: 0,
+                resistors: null,
+            },
+            methods: {
+                init: function () {
+                    let self = this;
+                    self.resistors = self.E24;
+                    self.Vout = (1.25 * (1 + self.R2 / self.R1)).toFixed(1);
+                },
+            },
+            computed: {
+            },
+            watch: {
+                'R1': function(n,o) {
+                    let self = this;
+                    self.Vout = (1.25 * (1 + self.R2 / self.R1)).toFixed(1);
+                },
+                'R2': function(n,o) {
+                    let self = this;
+                    self.Vout = (1.25 * (1 + self.R2 / self.R1)).toFixed(1);
+                },
+                'Vout': function(n,o) {
+                    let self = this;
+                },
+            },
+        });
+
+    </script>
+</body>
+
+</html>

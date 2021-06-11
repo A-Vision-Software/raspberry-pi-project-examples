@@ -9,7 +9,7 @@
 #
 ################################################################################
 
-from gpiozero import PWMOutputDevice, DigitalOutputDevice
+from gpiozero import PWMOutputDevice, DigitalOutputDevice, InputDevice
 from webthing import (Property, Value)
 from time import sleep
 import devices
@@ -52,8 +52,9 @@ class DigitalOutput_property(Property):
     """Single digital output."""
 
     def __init__(self, theThing, propertyName='', outputPin=0):
-        self.output = DigitalOutputDevice(outputPin, active_high=False)
+        self.outputPin = outputPin
         self.outputValue = Value(0.0, lambda v: self.setOutput(v))
+        self.output = DigitalOutputDevice(self.outputPin, active_high=True)
         Property.__init__(
             self,
             thing=theThing,
@@ -69,8 +70,10 @@ class DigitalOutput_property(Property):
 
     def setOutput(self, v):
         if (v):
+            logging.debug('Set pin ON')
             self.output.on()
         else:
+            logging.debug('Set pin OFF')
             self.output.off()
 ################################################################################
 
@@ -255,13 +258,14 @@ class ADS1015_property(Property):
         )
         self.timer = tornado.ioloop.PeriodicCallback(
             self.update,
-            constants.SLOWUPDATEINTERVAL * 1000
+            (constants.SLOWUPDATEINTERVAL + analogPin*2) * 1000,
+            0.2
         )
         self.timer.start()
 
     def update(self):
         self.enable.on()
-        sleep(0.5)
+        sleep(1)
         if self.adc:
             value = self.adc.read(self.analogPin) / 2048 * 100
         else:

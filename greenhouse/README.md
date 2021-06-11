@@ -19,6 +19,7 @@ Requirements:
 
 Once you have your Raspberry Pi up and running, follow the following instructions to get the Greenhouse monitor script
 ```shell
+cd /home/pi
 wget https://github.com/A-Vision-Software/raspberry-pi-project-examples/archive/refs/heads/main.zip
 unzip -j main.zip "raspberry-pi-project-examples-main/greenhouse/*" -d greenhouse
 rm main.zip
@@ -29,6 +30,7 @@ chmod 0755 update.sh
 ```
 Make sure to have installed Python3 + pip (`sudo apt install python3 python3-pip`) before installing the Greenhouse monitor script.
 
+To update the monitor source code use `./update.sh` in the installation folder (`/home/pi/greenhouse`).
 
 ## Run the greenhouse Python script as a service
 
