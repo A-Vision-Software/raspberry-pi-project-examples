@@ -9,7 +9,7 @@
 #
 ################################################################################
 
-DEBUGLEVEL = 30         # see https://docs.python.org/3/library/logging.html#levels
+DEBUGLEVEL = 10         # see https://docs.python.org/3/library/logging.html#levels
 
 SLOWUPDATEINTERVAL = 30 # Update readonly values ever ## seconds
 UPDATEINTERVAL = 10     # Update readonly values ever ## seconds

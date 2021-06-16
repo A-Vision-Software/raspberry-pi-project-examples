@@ -20,9 +20,10 @@ class SensorBridge():
         self.address = I2Caddress
         self.analog_channel = 0
         self.reset()
-        logging.debug("SensorBridge status: {}" . format(bin(self.bus.read_byte(self.address))))
         self.digital = devices.TCA9534()
         self.analog = devices.MCP3021()
+        if (self.available()):
+            logging.debug("SensorBridge status: {}" . format(bin(self.bus.read_byte(self.address))))
 
     def available(self):
         return devices.I2Cexists(self.address)
@@ -35,14 +36,16 @@ class SensorBridge():
         logging.debug("SensorBridge closed")
 
     def read_analog(self, channel):
-        if (self.analog_channel != channel):
-            self.select_analog(channel)
+        logging.debug("SensorBridge read analog: {}", format(channel))
+        self.select_analog(channel)
         return self.analog.read() * 100  / 1024
 
     def read_digital(self, bit):
+        logging.debug("SensorBridge read digital: {}", format(bit))
         return self.digital.read(bit)
 
     def write_digital(self, bit, value):
+        logging.debug("SensorBridge write digital: {} => {}", format(bit), format(value))
         return self.digital.write(bit, value)
 
     def reset(self):
