@@ -11,6 +11,7 @@
 
 import smbus2
 import time
+import logging
 
 TMP75ADDRESS = 0x4F # Fixed!
 MCP3425ADDRESS = 0x68 # Fixed!
@@ -31,6 +32,8 @@ def I2Cexists(I2Caddress, I2Cbus=1):
 class _MCP3425():
     def __init__(self):
         self.address = MCP3425ADDRESS
+        if not self.available():
+            logging.debug("No MCP3425 found on: {}" . format(hex(self.address)))
 
     def available(self):
         return I2Cexists(self.address)
@@ -57,6 +60,8 @@ class _TMP75():
 
     def __init__(self):
         self.address = TMP75ADDRESS
+        if not self.available():
+            logging.debug("No TMP75 found on: {}" . format(hex(self.address)))
 
     def available(self):
         return I2Cexists(self.address)
@@ -84,7 +89,9 @@ class MCP3021():
         self.bus = smbus2.SMBus(1)
         self.address = I2Caddress
         self.reset()
-        
+        if not self.available():
+            logging.debug("No MCP3021 found on: {}" . format(hex(self.address)))
+
     def available(self):
         return I2Cexists(self.address)
 
@@ -111,7 +118,9 @@ class TCA9534():
         self.bus = smbus2.SMBus(1)
         self.address = I2Caddress
         self.reset()
-        
+        if not self.available():
+            logging.debug("No TCA9534 found on: {}" . format(hex(self.address)))
+
     def available(self):
         return I2Cexists(self.address)
 

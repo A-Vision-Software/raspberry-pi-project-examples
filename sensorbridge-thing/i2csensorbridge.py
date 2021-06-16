@@ -24,6 +24,8 @@ class SensorBridge():
         self.analog = devices.MCP3021()
         if (self.available()):
             logging.debug("SensorBridge status: {}" . format(bin(self.bus.read_byte(self.address))))
+        else:
+            logging.debug("No SensorBridge found on: {}" . format(hex(self.address)))
 
     def available(self):
         return devices.I2Cexists(self.address)
@@ -53,8 +55,9 @@ class SensorBridge():
 
     def select_analog(self, channel):
         self.analog_channel = channel
-        if (channel == 1):
-            self.bus.write_byte(self.address, 0b10000011)
-        if (channel == 2):
-            self.bus.write_byte(self.address, 0b10000101)
+        if (self.available()):
+            if (channel == 1):
+                self.bus.write_byte(self.address, 0b10000011)
+            if (channel == 2):
+                self.bus.write_byte(self.address, 0b10000101)
 
