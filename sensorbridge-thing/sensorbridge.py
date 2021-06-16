@@ -50,7 +50,7 @@ class AnalogSensors(Thing):
         )
         self.set_ui_href('https://raspberry.a-vision.solutions/greenhouse/settings.html')
         self.add_property(properties.SensorBridgeAnalogInput_property(self, names.A1I, 3, 0))
-        self.add_property(properties.SensorBridgeAnalogInput_property(self, names.A2I, 7, 0))
+        self.add_property(properties.SensorBridgeAnalogInput_property(self, names.A2I, 7, 1))
 
     def update_levels(self):
         for prop in self.properties:

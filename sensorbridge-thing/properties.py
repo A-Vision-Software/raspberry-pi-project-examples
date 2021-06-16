@@ -362,6 +362,10 @@ class SensorBridgeAnalogInput_property(Property):
                 '@type': 'LevelProperty',
                 'title': propertyName,
                 'type': 'number',
+                'minimum': 0,
+                'maximum': 100,
+                'unit': 'percent',
+                'readOnly': True,
                 'description': 'Analog input ' + propertyName
             }
         )
