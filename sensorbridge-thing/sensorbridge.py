@@ -19,6 +19,8 @@ import properties
 import devices
 from i2csensorbridge import SensorBridge
 
+_sensorbridge = SensorBridge(devices.SENSORBRIDGEADDRESS)
+
 class DigitalOutputs(Thing):
     """Free definable digital oututs."""
 
@@ -30,7 +32,7 @@ class DigitalOutputs(Thing):
             ['OnOffSwitch'],
             names.SBDIGITAL
         )
-        self.bridge = SensorBridge(devices.SENSORBRIDGEADDRESS)
+        self.bridge = _sensorbridge
 
         self.add_property(properties.SensorBridgeDigitalOutput_property(self, names.D1, 0))
         self.add_property(properties.SensorBridgeDigitalOutput_property(self, names.D2, 1))
@@ -51,7 +53,7 @@ class AnalogSensors(Thing):
             ['MultiLevelSensor'],
             names.SBANALOG
         )
-        self.bridge = SensorBridge(devices.SENSORBRIDGEADDRESS)
+        self.bridge = _sensorbridge
 
         self.set_ui_href('https://raspberry.a-vision.solutions/greenhouse/settings.html')
         self.add_property(properties.SensorBridgeAnalogInput_property(self, names.A1I, 3, 0))
