@@ -8,7 +8,7 @@ rm main.zip
 chmod 0755 install.sh
 chmod 0755 update.sh
 
-if [[ systemctl is-active --quiet sensorbridge ]]
+if systemctl is-active --quiet sensorbridge
 then 
     echo "restarting sensorbridge service"
     sudo service sensorbridge stop
