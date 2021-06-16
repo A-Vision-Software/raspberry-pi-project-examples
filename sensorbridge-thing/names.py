@@ -26,6 +26,7 @@ TMP75 = "Power control temperature"
 PWMPOWER = "Power control output"
 
 # Sensorbridge
+SBDIGITAL = "Sensorbridge digital activators"
 D1 = "D1"
 D2 = "D2"
 D3 = "D3"
@@ -33,5 +34,6 @@ D4 = "D4"
 D5 = "D5"
 D6 = "D6"
 
+SBANALOG = "Sensorbridge analog sensors"
 A1I = "A1I"
 A2I = "A2I"
