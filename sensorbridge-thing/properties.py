@@ -359,9 +359,9 @@ class SensorBridgeAnalogInput_property(Property):
             name=propertyName,
             value=self.inputValue,
             metadata={
-                '@type': 'OnOffProperty',
+                '@type': 'LevelProperty',
                 'title': propertyName,
-                'type': 'boolean',
+                'type': 'number',
                 'description': 'Analog input ' + propertyName
             }
         )
