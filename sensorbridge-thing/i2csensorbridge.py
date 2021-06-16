@@ -24,6 +24,9 @@ class SensorBridge():
         self.digital = devices.TCA9534()
         self.analog = devices.MCP3021()
 
+    def available(self):
+        return devices.I2Cexists(self.address)
+
     def __del__(self):
         del self.digital
         del self.analog

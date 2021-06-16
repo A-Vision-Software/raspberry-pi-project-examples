@@ -14,7 +14,7 @@ import time
 
 TMP75ADDRESS = 0x4F # Fixed!
 MCP3425ADDRESS = 0x68 # Fixed!
-SENSORBRIDGEADDRESS = 0x70 # Range 0x70 - 0x77
+SENSORBRIDGEADDRESS = 0x71 # Range 0x70 - 0x77
 
 ################################################################################
 def I2Cexists(I2Caddress, I2Cbus=1):
@@ -85,6 +85,9 @@ class MCP3021():
         self.address = I2Caddress
         self.reset()
         
+    def available(self):
+        return I2Cexists(self.address)
+
     def __del__(self):
         self.reset()
         self.bus.close()
@@ -93,8 +96,11 @@ class MCP3021():
         self.config = 0
 
     def read(self):
-        data = self.bus.read_i2c_block_data(self.address, 0, 2)
-        return (data[0]*256 + data[1]) >> 2
+        if self.available():
+            data = self.bus.read_i2c_block_data(self.address, 0, 2)
+            return (data[0]*256 + data[1]) >> 2
+
+        return 0
 ################################################################################
 
 
@@ -106,6 +112,9 @@ class TCA9534():
         self.address = I2Caddress
         self.reset()
         
+    def available(self):
+        return I2Cexists(self.address)
+
     def __del__(self):
         self.reset()
         self.bus.close()
@@ -117,12 +126,14 @@ class TCA9534():
         self.write_config()
 
     def read_config(self):
-        self.polarity = self.bus.read_byte_data(self.address, 0x02)
-        self.config = self.bus.read_byte_data(self.address, 0x03)
+        if self.available():
+            self.polarity = self.bus.read_byte_data(self.address, 0x02)
+            self.config = self.bus.read_byte_data(self.address, 0x03)
 
     def write_config(self):
-        self.bus.write_byte_data(self.address, 0x02, self.polarity)
-        self.bus.write_byte_data(self.address, 0x03, self.config)
+        if self.available():
+            self.bus.write_byte_data(self.address, 0x02, self.polarity)
+            self.bus.write_byte_data(self.address, 0x03, self.config)
         
     def set_input(self, bit):
         if (self.config & (1 << bit) == 0):
@@ -142,7 +153,9 @@ class TCA9534():
 
     def read(self, bit):
         self.set_input(bit)
-        bits = self.bus.read_byte_data(self.address, 0x00)
+        bits = 0
+        if self.available():
+            bits = self.bus.read_byte_data(self.address, 0x00)
         return (bits & (1 << bit)) > 0
 
     def write(self, bit, value):
@@ -152,5 +165,6 @@ class TCA9534():
         else:
             self.output = self.output & ~(1 << bit)
             
-        self.bus.write_byte_data(self.address, 0x01, self.output)
+        if self.available():
+            self.bus.write_byte_data(self.address, 0x01, self.output)
 ################################################################################
