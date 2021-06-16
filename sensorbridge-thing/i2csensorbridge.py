@@ -45,7 +45,7 @@ class SensorBridge():
         return self.digital.read(bit)
 
     def write_digital(self, bit, value):
-        logging.debug("SensorBridge write digital: {} => {}", format(bit, value))
+        logging.debug("SensorBridge write digital: {} => {}", format(bit, str(value)))
         return self.digital.write(bit, value)
 
     def reset(self):
