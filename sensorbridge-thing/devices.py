@@ -122,7 +122,8 @@ class TCA9534():
             logging.debug("No TCA9534 found on: {}" . format(hex(self.address)))
 
     def available(self):
-        return I2Cexists(self.address)
+        return True
+        #return I2Cexists(self.address)
 
     def __del__(self):
         self.reset()
