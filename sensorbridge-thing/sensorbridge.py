@@ -24,9 +24,9 @@ class DigitalOutputs(Thing):
         Thing.__init__(
             self,
             'urn:dev:ops:greenhouse-analog-sensors',
-            names.DIGITAL,
+            names.SBDIGITAL,
             ['OnOffSwitch'],
-            names.DIGITAL
+            names.SBDIGITAL
         )
 
         self.add_property(properties.SensorBridgeDigitalOutput_property(self, names.D1, 0))
@@ -44,9 +44,9 @@ class AnalogSensors(Thing):
         Thing.__init__(
             self,
             'urn:dev:ops:greenhouse-analog-sensors',
-            names.ANALOG,
+            names.SBANALOG,
             ['MultiLevelSensor'],
-            names.ANALOG
+            names.SBANALOG
         )
         self.set_ui_href('https://raspberry.a-vision.solutions/greenhouse/settings.html')
         self.add_property(properties.SensorBridgeAnalogInput_property(self, names.A1I, 3, 0))
