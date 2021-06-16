@@ -285,7 +285,10 @@ class SensorBridgeDigitalOutput_property(Property):
     def __init__(self, theThing, propertyName='', outputPin=0):
         self.outputPin = outputPin
         self.outputValue = Value(0.0, lambda v: self.setOutput(v))
-        self.bridge = SensorBridge(devices.SENSORBRIDGEADDRESS)
+        if (theThing.bridge):
+            self.bridge = theThing.bridge
+        else:
+            self.bridge = SensorBridge(devices.SENSORBRIDGEADDRESS)
         self.setOutput(0)
         Property.__init__(
             self,
@@ -316,7 +319,10 @@ class SensorBridgeDigitalInput_property(Property):
     def __init__(self, theThing, propertyName='', inputPin=0):
         self.inputPin = inputPin
         self.inputValue = Value(0.0)
-        self.bridge = SensorBridge(devices.SENSORBRIDGEADDRESS)
+        if (theThing.bridge):
+            self.bridge = theThing.bridge
+        else:
+            self.bridge = SensorBridge(devices.SENSORBRIDGEADDRESS)
         Property.__init__(
             self,
             thing=theThing,
@@ -351,7 +357,10 @@ class SensorBridgeAnalogInput_property(Property):
         self.enablePin = enablePin
         self.analogPin = analogPin
         self.inputValue = Value(0.0)
-        self.bridge = SensorBridge(devices.SENSORBRIDGEADDRESS)
+        if (theThing.bridge):
+            self.bridge = theThing.bridge
+        else:
+            self.bridge = SensorBridge(devices.SENSORBRIDGEADDRESS)
         self.bridge.write_digital(self.enablePin, False)
         Property.__init__(
             self,
