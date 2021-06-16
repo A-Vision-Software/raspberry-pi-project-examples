@@ -36,16 +36,16 @@ class SensorBridge():
         logging.debug("SensorBridge closed")
 
     def read_analog(self, channel):
-        logging.debug("SensorBridge read analog: {}", format(channel))
+        logging.debug("SensorBridge read analog: {}" . format(channel))
         self.select_analog(channel)
         return self.analog.read() * 100  / 1024
 
     def read_digital(self, bit):
-        logging.debug("SensorBridge read digital: {}", format(bit))
+        logging.debug("SensorBridge read digital: {}" . format(bit))
         return self.digital.read(bit)
 
     def write_digital(self, bit, value):
-        logging.debug("SensorBridge write digital: {_bit} => {_value}", format(_bit = bit, _value = str(value)))
+        logging.debug("SensorBridge write digital: {} => {}" . format(bit, str(value)))
         return self.digital.write(bit, value)
 
     def reset(self):
