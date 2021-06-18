@@ -12,11 +12,13 @@
 import logging
 import tornado.ioloop
 from time import sleep
-from properties import constants
 from gpiozero import DigitalOutputDevice
 from webthing import (Property, Value)
 from devices.ADS1015 import ADS1015
 from devices.SHT20 import greenhouseSHT20
+
+from config import config
+_config = config.Config('greenhouse')
 
 ################################################################################
 class AnalogInput_property(Property):
@@ -50,7 +52,7 @@ class AnalogInput_property(Property):
         )
         self.timer = tornado.ioloop.PeriodicCallback(
             self.update,
-            (constants.SLOWUPDATEINTERVAL + analogPin*2) * 1000,
+            (_config.setting('SLOWUPDATEINTERVAL') + analogPin*2) * 1000,
             0.2
         )
         self.timer.start()
@@ -110,7 +112,7 @@ class TemperatureHumidity_property(Property):
         )
         self.timer = tornado.ioloop.PeriodicCallback(
             self.update,
-            constants.FASTUPDATEINTERVAL * 1000
+            _config.setting('FASTUPDATEINTERVAL') * 1000
         )
         self.timer.start()
 
