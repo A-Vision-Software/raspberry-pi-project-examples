@@ -52,7 +52,7 @@ class AnalogInput_property(Property):
         )
         self.timer = tornado.ioloop.PeriodicCallback(
             self.update,
-            (_config.setting('SLOWUPDATEINTERVAL') + analogPin*2) * 1000,
+            (int(_config.setting('SLOWUPDATEINTERVAL')) + analogPin*2) * 1000,
             0.2
         )
         self.timer.start()
@@ -112,7 +112,7 @@ class TemperatureHumidity_property(Property):
         )
         self.timer = tornado.ioloop.PeriodicCallback(
             self.update,
-            _config.setting('FASTUPDATEINTERVAL') * 1000
+            int(_config.setting('FASTUPDATEINTERVAL')) * 1000
         )
         self.timer.start()
 
