@@ -13,12 +13,14 @@
 
 import logging
 from webthing import (Action, Event, MultipleThings, Property, Thing, Value, WebThingServer)
-from config import config
 from properties import sensorbridge
 import devices.SensorBridge
 
-_sensorbridge = devices.SensorBridge.SensorBridge(devices.SensorBridge.SENSORBRIDGEADDRESS)
+from config import config
 _config = config.Config('sensorbridge')
+SENSORBRIDGEADDRESS = int(_config.setting('SENSORBRIDGEADDRESS'))
+_sensorbridge = devices.SensorBridge.SensorBridge(SENSORBRIDGEADDRESS)
+
 
 class DigitalOutputs(Thing):
     """Free definable digital oututs."""

@@ -14,10 +14,10 @@ import tornado.ioloop
 from time import sleep
 from webthing import (Property, Value)
 from devices.SensorBridge import SensorBridge
-from devices.SensorBridge import SENSORBRIDGEADDRESS
 
 from config import config
 _config = config.Config('sensorbridge')
+SENSORBRIDGEADDRESS = int(_config.setting('SENSORBRIDGEADDRESS'))
 
 ################################################################################
 class DigitalOutput_property(Property):
