@@ -15,10 +15,9 @@ import logging
 #from __future__ import division, print_function
 from config import config
 from webthing import (Action, Event, MultipleThings, Property, Thing, Value, WebThingServer)
+from properties.raspberry import DigitalOutput_property
 from properties.greenhouse import TemperatureHumidity_property
-from properties.greenhouse import DigitalOutput_property
 from properties.greenhouse import AnalogInput_property
-from properties import constants
 
 _config = config.Config('greenhouse')
 
