@@ -92,15 +92,13 @@ class AnalogSensors(Thing):
 def run_server():
     sensors = AnalogSensors()
     sensors.update_levels()
-
     humidity_temperature = HumidityTempSensor()
     humidity_temperature.update_levels()
-
     activators = DigitalOutputs()
 
     # If adding more than one thing, use MultipleThings() with a name.
     # In the single thing case, the thing's name will be broadcast.
-    server = WebThingServer(MultipleThings([sensors, humidity_temperature, activators], 'GreenhouseDevice'), port=8881)
+    server = WebThingServer(MultipleThings([sensors, humidity_temperature, activators], 'GreenhouseDevice'), port=int(_config.parameter('server.PORT')))
     try:
         logging.info('starting the server')
         server.start()

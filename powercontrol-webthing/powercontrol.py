@@ -85,14 +85,14 @@ def run_server():
 
     # If adding more than one thing, use MultipleThings() with a name.
     # In the single thing case, the thing's name will be broadcast.
-    server = WebThingServer(MultipleThings([currentSensor, temperatureSensor, PWMpower], 'PowerControlDevice'), port=8887)
+    server = WebThingServer(MultipleThings([currentSensor, temperatureSensor, PWMpower], 'PowerControlDevice'), port=int(_config.parameter('server.PORT')))
     try:
         logging.info('starting the server')
         server.start()
     except:
+        logging.debug('canceling the sensors update looping task')
         currentSensor.cancel_update_level_task()
         temperatureSensor.cancel_update_level_task()
-
         logging.info('stopping the server')
         server.stop()
         logging.info('done')

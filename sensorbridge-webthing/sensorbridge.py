@@ -76,7 +76,7 @@ def run_server():
 
     # If adding more than one thing, use MultipleThings() with a name.
     # In the single thing case, the thing's name will be broadcast.
-    server = WebThingServer(MultipleThings([sensors, activators], 'SensorBridgeDevice'), port=int(_config.setting('WEBTHINGSERVERPORT')))
+    server = WebThingServer(MultipleThings([sensors, activators], 'SensorBridgeDevice'), port=int(_config.parameter('server.PORT')))
     try:
         logging.info('starting the server')
         server.start()
