@@ -70,12 +70,11 @@ class AnalogSensors(Thing):
 def run_server():
     sensors = AnalogSensors()
     sensors.update_levels()
-
     activators = DigitalOutputs()
 
     # If adding more than one thing, use MultipleThings() with a name.
     # In the single thing case, the thing's name will be broadcast.
-    server = WebThingServer(MultipleThings([sensors, activators], 'SensorBridgeDevice'), port=8881)
+    server = WebThingServer(MultipleThings([sensors, activators], 'SensorBridgeDevice'), port=int(_config.setting('WEBTHINGSERVERPORT')))
     try:
         logging.info('starting the server')
         server.start()
