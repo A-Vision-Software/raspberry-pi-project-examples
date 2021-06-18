@@ -21,9 +21,11 @@ Once you have your Raspberry Pi up and running, follow the following instruction
 ```shell
 cd /home/pi
 wget https://github.com/A-Vision-Software/raspberry-pi-project-examples/archive/refs/heads/main.zip
-unzip -j main.zip "raspberry-pi-project-examples-main/greenhouse-webthing/*" -d greenhouse
+unzip -o main.zip "raspberry-pi-project-examples-main/greenhouse-webthing/*" -d greenhouse
 rm main.zip
 cd greenhouse
+mv raspberry-pi-project-examples-main/greenhouse-webthing/* .
+rm -r raspberry-pi-project-examples-main/
 chmod 0755 install.sh
 chmod 0755 update.sh
 ./install.sh
