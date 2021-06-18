@@ -17,7 +17,7 @@ from devices.SensorBridge import SensorBridge
 
 from config import config
 _config = config.Config('sensorbridge')
-SENSORBRIDGEADDRESS = int(_config.setting('i2c.SENSORBRIDGEADDRESS'))
+SENSORBRIDGEADDRESS = int(_config.parameter('i2c.SENSORBRIDGEADDRESS'))
 
 ################################################################################
 class DigitalOutput_property(Property):

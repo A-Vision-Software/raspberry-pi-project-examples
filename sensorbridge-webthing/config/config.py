@@ -23,7 +23,16 @@ class Config():
         self.system.read(str(self.path) + '/system.ini')
 
     def name(self, parameter):
-        return self.ini['names'][parameter]
+        return self.parameter(parameter)
+
+    def parameter(self, parameter):
+        try:
+            section, parametername = parameter.split(".")
+        except:
+            section = 'names'
+            parametername = parameter
+
+        return self.ini[section][parametername]
 
     def setting(self, parameter):
         try:
