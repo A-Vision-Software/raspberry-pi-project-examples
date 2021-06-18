@@ -26,4 +26,10 @@ class Config():
         return self.ini['names'][parameter]
 
     def setting(self, parameter):
-        return self.system['system'][parameter]
+        try:
+            section, parametername = parameter.split(".")
+        except:
+            section = 'system'
+            parametername = parameter
+
+        return self.system[section][parametername]

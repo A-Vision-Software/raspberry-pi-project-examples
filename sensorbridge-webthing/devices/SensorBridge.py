@@ -15,7 +15,7 @@ from .devices import I2Cexists
 from .TCA9534 import TCA9534
 from .MCP3021 import MCP3021
 
-SENSORBRIDGEADDRESS = 0x71 # Range 0x70 - 0x77
+SENSORBRIDGEADDRESS = 0x70 # Range 0x70 - 0x77
 
 class SensorBridge():
     

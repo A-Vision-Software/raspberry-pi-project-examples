@@ -18,7 +18,7 @@ import devices.SensorBridge
 
 from config import config
 _config = config.Config('sensorbridge')
-SENSORBRIDGEADDRESS = int(_config.setting('SENSORBRIDGEADDRESS'))
+SENSORBRIDGEADDRESS = int(_config.setting('i2c.SENSORBRIDGEADDRESS'))
 _sensorbridge = devices.SensorBridge.SensorBridge(SENSORBRIDGEADDRESS)
 
 
