@@ -12,10 +12,11 @@
 ################################################################################
 
 import logging
-from config import names
+from config import config
 from webthing import (Action, Event, MultipleThings, Property, Thing, Value, WebThingServer)
-from properties import constants
 import properties
+
+_config = config.Config('powercontrol')
 
 class PowerOutputThing(Thing):
     """Output power control"""
@@ -24,11 +25,11 @@ class PowerOutputThing(Thing):
         Thing.__init__(
             self,
             'urn:dev:ops:a-vision-analog-activator',
-            names.PWMPOWER,
+            _config.name('PWMPOWER'),
             ['MultiLevelSensor'],
-            names.PWMPOWER
+            _config.name('PWMPOWER')
         )
-        self.add_property(properties.PWM_property(self, names.PWMPOWER, PWMpowerPin))
+        self.add_property(properties.PWM_property(self, _config.name('PWMPOWER'), PWMpowerPin))
 
 class CurrentSensorThing(Thing):
     """Analog current measurement"""
@@ -37,11 +38,11 @@ class CurrentSensorThing(Thing):
         Thing.__init__(
             self,
             'urn:dev:ops:a-vision-analog-sensors',
-            names.MCP3425,
+            _config.name('MCP3425'),
             ['MultiLevelSensor'],
-            names.MCP3425
+            _config.name('MCP3425')
         )
-        self.add_property(properties.MCP3425_property(self, names.MCP3425))
+        self.add_property(properties.MCP3425_property(self, _config.name('MCP3425')))
 
     def update_levels(self):
         for prop in self.properties:
@@ -59,12 +60,12 @@ class TemperatureSensorThing(Thing):
         Thing.__init__(
             self,
             'urn:dev:ops:a-vision-temperature-sensors',
-            names.TMP75,
+            _config.name('TMP75'),
             ['MultiLevelSensor'],
-            names.TMP75
+            _config.name('TMP75')
         )
 
-        self.add_property(properties.TMP75_property(self, names.TMP75))
+        self.add_property(properties.TMP75_property(self, _config.name('TMP75')))
 
     def update_levels(self):
         for prop in self.properties:
@@ -99,7 +100,7 @@ def run_server():
 
 if __name__ == '__main__':
     logging.basicConfig(
-        level=constants.DEBUGLEVEL,
+        level=int(_config.setting('DEBUGLEVEL')),
         format="%(asctime)s %(filename)s:%(lineno)s %(levelname)s %(message)s"
     )
     run_server()

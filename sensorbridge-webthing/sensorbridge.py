@@ -14,7 +14,6 @@
 import logging
 from webthing import (Action, Event, MultipleThings, Property, Thing, Value, WebThingServer)
 from config import config
-from properties import constants
 from properties import sensorbridge
 import devices.SensorBridge
 
@@ -90,7 +89,7 @@ def run_server():
 
 if __name__ == '__main__':
     logging.basicConfig(
-        level=constants.DEBUGLEVEL,
+        level=int(_config.setting('DEBUGLEVEL')),
         format="%(asctime)s %(filename)s:%(lineno)s %(levelname)s %(message)s"
     )
     run_server()
