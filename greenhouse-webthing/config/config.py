@@ -18,7 +18,12 @@ class Config():
         self.path = pathlib.Path(__file__).parent.absolute()
         self.ini = configparser.ConfigParser()
         self.ini.read(str(self.path) + '/' + name + '.ini')
-        #print(self.ini.sections())
+
+        self.system = configparser.ConfigParser()
+        self.system.read(str(self.path) + '/system.ini')
 
     def name(self, parameter):
         return self.ini['names'][parameter]
+
+    def setting(self, parameter):
+        return self.system['system'][parameter]

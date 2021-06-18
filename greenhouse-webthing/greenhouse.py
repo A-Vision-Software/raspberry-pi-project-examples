@@ -13,12 +13,14 @@
 
 import logging
 #from __future__ import division, print_function
-from config import names
+from config import config
 from webthing import (Action, Event, MultipleThings, Property, Thing, Value, WebThingServer)
 from properties.greenhouse import TemperatureHumidity_property
 from properties.greenhouse import DigitalOutput_property
 from properties.greenhouse import AnalogInput_property
 from properties import constants
+
+_config = config.Config('greenhouse')
 
 class HumidityTempSensor(Thing):
     """A humidity / temperature sensor which updates its measurement every few seconds."""
@@ -51,15 +53,15 @@ class DigitalOutputs(Thing):
         Thing.__init__(
             self,
             'urn:dev:ops:greenhouse-analog-sensors',
-            names.DIGITAL,
+            _config.name('DIGITAL'),
             ['OnOffSwitch'],
-            names.DIGITAL
+            _config.name('DIGITAL')
         )
 
-        self.add_property(DigitalOutput_property(self, names.O18, 18))
-        self.add_property(DigitalOutput_property(self, names.O19, 19))
-        self.add_property(DigitalOutput_property(self, names.O20, 21))
-        self.add_property(DigitalOutput_property(self, names.O21, 20))
+        self.add_property(DigitalOutput_property(self, _config.name('O18'), 18))
+        self.add_property(DigitalOutput_property(self, _config.name('O19'), 19))
+        self.add_property(DigitalOutput_property(self, _config.name('O20'), 21))
+        self.add_property(DigitalOutput_property(self, _config.name('O21'), 20))
 
 
 class AnalogSensors(Thing):
@@ -69,15 +71,15 @@ class AnalogSensors(Thing):
         Thing.__init__(
             self,
             'urn:dev:ops:greenhouse-analog-sensors',
-            names.ANALOG,
+            _config.name('ANALOG'),
             ['MultiLevelSensor'],
-            names.ANALOG
+            _config.name('ANALOG')
         )
         self.set_ui_href('https://raspberry.a-vision.solutions/greenhouse/settings.html')
-        self.add_property(AnalogInput_property(self, names.AI0, 22, 0))
-        self.add_property(AnalogInput_property(self, names.AI1, 23, 1))
-        self.add_property(AnalogInput_property(self, names.AI3, 24, 2))
-        self.add_property(AnalogInput_property(self, names.AI2, 25, 3))
+        self.add_property(AnalogInput_property(self, _config.name('AI0'), 22, 0))
+        self.add_property(AnalogInput_property(self, _config.name('AI1'), 23, 1))
+        self.add_property(AnalogInput_property(self, _config.name('AI3'), 24, 2))
+        self.add_property(AnalogInput_property(self, _config.name('AI2'), 25, 3))
 
     def update_levels(self):
         for prop in self.properties:
@@ -114,7 +116,7 @@ def run_server():
 
 if __name__ == '__main__':
     logging.basicConfig(
-        level=constants.DEBUGLEVEL,
+        level=_config.setting('DEBUGLEVEL'),
         format="%(asctime)s %(filename)s:%(lineno)s %(levelname)s %(message)s"
     )
     run_server()
