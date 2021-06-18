@@ -115,7 +115,7 @@ def run_server():
 
 if __name__ == '__main__':
     logging.basicConfig(
-        level=_config.setting('DEBUGLEVEL'),
+        level=int(_config.setting('DEBUGLEVEL')),
         format="%(asctime)s %(filename)s:%(lineno)s %(levelname)s %(message)s"
     )
     run_server()
