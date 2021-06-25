@@ -128,9 +128,10 @@ class AnalogInput_property(Property):
 
     def update(self):
         self.bridge.write_digital(self.enablePin, True)
-        sleep(1)
+        sleep(0.5)
         value = self.bridge.read_analog(self.analogPin)
         self.bridge.write_digital(self.enablePin, False)
+        sleep(0.5)
         self.inputValue.notify_of_external_update(value)
 
     def cancel(self):
