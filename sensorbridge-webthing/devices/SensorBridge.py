@@ -60,7 +60,7 @@ class SensorBridge():
     def select_analog(self, channel):
         self.analog_channel = channel
         if (self.available()):
-            if (channel == 1):
+            if (channel == 0):
                 self.bus.write_byte(self.address, 0b10000011)
-            if (channel == 2):
+            if (channel == 1):
                 self.bus.write_byte(self.address, 0b10000101)
